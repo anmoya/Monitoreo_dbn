@@ -1,0 +1,34 @@
+{
+  "name": "monitoreos",
+  "version": "1.0.0",
+  "description": "Conectamos a bd, extraemos info, generamos html y convertimos a pdf.",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "nodemailer": "^6.1.0",
+    "puppeteer": "^1.14.0",
+    "sequelize": "^5.3.5",
+    "tedious": "^6.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anmoya/Monitoreo_dbn.git"
+  },
+  "keywords": [
+    "Monitoreo",
+    "dbn",
+    "pdf",
+    "mail"
+  ],
+  "author": "Alfonso Moya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anmoya/Monitoreo_dbn/issues"
+  },
+  "homepage": "https://github.com/anmoya/Monitoreo_dbn#readme"
+}

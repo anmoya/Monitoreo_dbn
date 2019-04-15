@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--link href="css/style.css" rel="stylesheet" -->
+</head>
+
+<body class="container">
+    <div id="piechart"></div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Persona</th>
+                <th>Vencimiento</th>
+                <th>Dirección Certificado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% certs.forEach( item => { %>
+            <tr>
+                <td><%= item.nomb_pers %></td>
+                <td><%= new Date(item.fete_cert).toISOString().slice(0,10) %></td>
+                <td><%= item.arch_cert %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2">DTES</th>
+            </tr>
+            <tr>
+                <th>Estado Documento</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% dtes.forEach( item => { %>
+            <tr>
+                <td><%= item.esta_docu %></td>
+                <td><%= item.cantidad %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2">DTOS</th>
+            </tr>
+            <tr>
+                <th>Estado Documento</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% dtos.forEach( item => { %>
+            <tr>
+                <td><%= item.esta_docu %></td>
+                <td><%= item.cantidad %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="3">Mayores Proveedores</th>
+            </tr>
+            <tr>
+                <th>Rut</th>
+                <th>Razon Social</th>
+                <th>Cantidad Documentos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% provs.forEach( item => { %>
+            <tr>
+                <td><%= item.rutt_emis %></td>
+                <td><%= item.razon_social %></td>
+                <td><%= item.cantidad %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="3">Sin respuesta SII</th>
+            </tr>
+            <tr>
+                <th>Empresa</th>
+                <th>Tipo Documento</th>
+                <th>Folio</th>
+                <th>Días sin respuesta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% sinRespSIi.forEach( item => { %>
+            <tr>
+                <td><%= item.empresa %></td>
+                <td><%= item.tipo %></td>
+                <td><%= item.folio %></td>
+                <td><%= item.total_dias %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        // AXIOS to /chart
+        async function getUser() {
+            try {
+                const response = await axios.get('/chart');
+                console.log(response.data[0][0]);
+                let arr = [];
+                //arr.push([data.response[0][0][0],])
+                response.data[0].forEach( item => {
+                    let dok = item.
+                })
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getUser();
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+                    'Western', 'Literature', { role: 'annotation' }],
+                ['2010', 10, 24, 20, 32, 18, 5, ''],
+                ['2020', 16, 22, 23, 30, 16, 9, ''],
+                ['2030', 28, 19, 29, 30, 12, 13, '']
+            ]);
+
+            var options = {
+                width: 600,
+                height: 400,
+                legend: { position: 'top', maxLines: 3 },
+                bar: { groupWidth: '75%' },
+                isStacked: true
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+
+        }
+    </script>
+</body>
+
+</html>
